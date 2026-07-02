@@ -87,23 +87,32 @@ export default function HelpPage() {
 
       </section>
 
-      <section className="bg-blue-900 py-16 text-center text-white">
+      {/* Contact Support */}
+<section className="bg-blue-900 py-16 text-white">
 
-        <Mail className="mx-auto h-12 w-12" />
+  <div className="mx-auto max-w-4xl px-6 text-center">
 
-        <h2 className="mt-5 text-4xl font-bold">
-          Still Need Help?
-        </h2>
+    <Mail className="mx-auto h-12 w-12" />
 
-        <p className="mx-auto mt-5 max-w-2xl text-lg text-blue-100">
-          Our team is ready to assist you with admissions, courses and general enquiries.
-        </p>
+    <h2 className="mt-5 text-4xl font-bold">
+      Still Need Help?
+    </h2>
 
-        <button className="mt-8 rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 transition hover:bg-gray-100">
-          Contact Support
-        </button>
+    <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-blue-100">
+      If you couldn't find the answer you're looking for, our support team is
+      here to help. Reach out to us and we'll respond as soon as possible.
+    </p>
 
-      </section>
+    <a
+      href="mailto:info@his.edu.ng"
+      className="mt-8 inline-block rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 transition hover:bg-gray-100"
+    >
+      Contact Support
+    </a>
+
+  </div>
+
+</section>
 
     </div>
   );
