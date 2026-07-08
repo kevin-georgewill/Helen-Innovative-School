@@ -141,7 +141,6 @@ export default function CoursesPage() {
           )}
         </section>
       </main>
-      <Footer />
     </>
   )
 }
