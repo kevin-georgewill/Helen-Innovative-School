@@ -194,7 +194,7 @@ export default function AboutPage() {
 
       </section>
 
-      {/* Call to Action */}
+      /* Call to Action */
 <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-20 text-white">
 
   <div className="mx-auto max-w-5xl px-6 text-center">
