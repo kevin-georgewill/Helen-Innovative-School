@@ -44,25 +44,25 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-20">
 
-      {/* Hero */}
-      <section className="rounded-3xl bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 px-8 py-20 text-center text-white">
+  {/* Hero */}
+  <section className="w-full bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-24 text-white">
+    <div className="mx-auto max-w-6xl px-8 text-center">
+      <h1 className="text-5xl font-bold">
+        Helen Innovative School
+      </h1>
 
-        <h1 className="text-5xl font-bold">
-          Helen Innovative School
-        </h1>
+      <p className="mt-4 text-2xl text-blue-100">
+        Where Every Profession Meets Innovation
+      </p>
 
-        <p className="mt-4 text-2xl text-blue-100">
-          Where Every Profession Meets Innovation
-        </p>
-
-        <p className="mx-auto mt-8 max-w-4xl text-lg leading-8 text-blue-100">
-          Helen Innovative School equips students, professionals,
-          entrepreneurs and organizations with practical technology,
-          innovation and AI skills that prepare them for the future of work.
-        </p>
-
+      <p className="mx-auto mt-8 max-w-4xl text-lg leading-8 text-blue-100">
+        Helen Innovative School equips students, professionals,
+        entrepreneurs and organizations with practical technology,
+        innovation and AI skills that prepare them for the future of work.
+      </p>
+    </div>
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <button className="rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 hover:bg-gray-100 transition">
             Explore Courses
@@ -195,19 +195,42 @@ export default function AboutPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="rounded-3xl bg-blue-900 px-8 py-16 text-center text-white">
+<section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-20 text-white">
 
-        <h2 className="text-4xl font-bold">
-          Building Future-Ready Professionals
-        </h2>
+  <div className="mx-auto max-w-5xl px-6 text-center">
 
-        <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-blue-100">
-          Learn practical skills in Artificial Intelligence, digital
-          transformation, innovation and emerging technologies through
-          flexible learning designed for today's world.
-        </p>
+    <h2 className="text-4xl font-bold md:text-5xl">
+      Ready to Shape the Future?
+    </h2>
 
-      </section>
+    <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-blue-100">
+      Join Helen Innovative School and gain practical, industry-ready skills
+      in Artificial Intelligence, digital transformation, innovation and
+      emerging technologies. Learn from experienced professionals and prepare
+      for the future of work.
+    </p>
+
+    <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+
+      <a
+        href="/courses"
+        className="rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 transition hover:bg-gray-100"
+      >
+        Explore Courses
+      </a>
+
+      <a
+        href="/register"
+        className="rounded-xl border border-white px-8 py-4 font-semibold text-white transition hover:bg-white hover:text-blue-900"
+      >
+        Apply Now
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
 
     </div>
   );
