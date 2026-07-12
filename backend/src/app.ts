@@ -14,12 +14,21 @@ const app = express();
 app.use(helmet());
 
 // FRONTEND_URL may be a single origin or a comma-separated list (e.g. multiple dev ports).
-const allowedOrigins = (process.env.FRONTEND_URL ?? '')
-  .split(',')
-  .map((o) => o.trim())
-  .filter(Boolean);
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
+app.options('*', cors());
 app.use(express.json());
+app.use((req, _res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
 app.use(morgan('dev'));
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
