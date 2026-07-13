@@ -59,57 +59,6 @@ export default function VerifyCertificatePage() {
 
       </section>
 
-      {/* Demo Result */}
-      <section className="mx-auto max-w-3xl px-6">
-
-        <div className="rounded-3xl border bg-green-50 p-8">
-
-          <div className="flex items-center gap-3">
-
-            <BadgeCheck className="h-10 w-10 text-green-600" />
-
-            <div>
-
-              <h3 className="text-2xl font-bold text-green-700">
-                Certificate Verified
-              </h3>
-
-              <p className="text-gray-600">
-                This certificate is authentic.
-              </p>
-
-            </div>
-
-          </div>
-
-          <div className="mt-8 space-y-4">
-
-            <div className="flex justify-between border-b pb-3">
-              <span className="font-medium">Student</span>
-              <span>John Doe</span>
-            </div>
-
-            <div className="flex justify-between border-b pb-3">
-              <span className="font-medium">Course</span>
-              <span>Artificial Intelligence Fundamentals</span>
-            </div>
-
-            <div className="flex justify-between border-b pb-3">
-              <span className="font-medium">Certificate No.</span>
-              <span>HIS-2026-000123</span>
-            </div>
-
-            <div className="flex justify-between">
-              <span className="font-medium">Issue Date</span>
-              <span>15 July 2026</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
     </div>
   );
 }
