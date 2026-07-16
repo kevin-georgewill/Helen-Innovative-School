@@ -62,8 +62,20 @@ const uploadFile = <T>(path: string, formData: FormData) =>
 // ─── Auth ────────────────────────────────────────────────────────────────────
 
 export const authApi = {
-  register: (body: { email: string; password: string; full_name: string }) =>
-    post<{ token: string }>('/auth/register', body),
+  register: (body: {
+  email: string
+  password: string
+  full_name: string
+  role: 'student' | 'instructor'
+
+  professional_title?: string
+  expertise?: string
+  years_of_experience?: number
+  bio?: string
+  linkedin?: string
+  website?: string
+}) =>
+  post<{ token: string }>('/auth/register', body),
 
   // Documented backend login. The frontend signs in via Supabase Auth directly
   // (see lib/auth.ts), so this mirrors API.md for completeness / non-browser clients.

@@ -19,14 +19,35 @@ export function useMe() {
 // DB), then we sign in via Supabase to establish the managed session, and load the profile.
 export function useRegister() {
   const qc = useQueryClient()
+
   return useMutation({
-    mutationFn: async (body: { email: string; password: string; full_name: string }) => {
+    mutationFn: async (body: {
+      email: string
+      password: string
+      full_name: string
+      role: 'student' | 'instructor'
+
+      professional_title?: string
+      expertise?: string
+      years_of_experience?: number
+      bio?: string
+      linkedin?: string
+      website?: string
+    }) => {
       await authApi.register(body)
+
       const { error } = await signIn(body.email, body.password)
-      if (error) throw new Error(error.message)
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
       return authApi.me()
     },
-    onSuccess: (profile) => qc.setQueryData(authKeys.me, profile),
+
+    onSuccess: (profile) => {
+      qc.setQueryData(authKeys.me, profile)
+    },
   })
 }
 

@@ -264,7 +264,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <Link
-                href="/register"
+                href="/get-started"
                 className="inline-flex items-center justify-center w-full sm:w-auto px-14 py-3.5 bg-his-navy hover:bg-his-navy-light text-white font-semibold rounded-full transition-all duration-200 text-base whitespace-nowrap"
               >
                 Get Started
@@ -702,7 +702,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/register"
+                href="/get-started"
                 className="inline-flex items-center justify-center px-9 py-3.5 bg-his-green hover:bg-his-green-hover text-white font-semibold rounded-lg transition-all duration-200 text-base shadow-lg"
               >
                 Apply Now

@@ -28,7 +28,7 @@ export const dashboardPathForRole = (role: UserRole): string => {
     case 'admin':
       return '/admin/dashboard'
     case 'instructor':
-      return '/instructor/dashboard'
+      return '/instructor'
     default:
       return '/dashboard'
   }

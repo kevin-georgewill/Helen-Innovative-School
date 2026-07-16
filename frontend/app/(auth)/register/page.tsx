@@ -6,7 +6,7 @@
 
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useRegister } from '@/lib/queries/auth'
 import { dashboardPathForRole } from '@/lib/auth'
 import AuthBrandPanel from '@/components/shared/AuthBrandPanel'
@@ -14,6 +14,12 @@ import Logo from '@/components/shared/Logo'
 
 export default function RegisterPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+const role =
+  searchParams.get('role') === 'instructor'
+    ? 'instructor'
+    : 'student'
   const register = useRegister()
 
   const [fullName, setFullName] = useState('')
@@ -22,6 +28,12 @@ export default function RegisterPage() {
   const [confirm, setConfirm] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [localError, setLocalError] = useState<string | null>(null)
+  const [professionalTitle, setProfessionalTitle] = useState('')
+const [expertise, setExpertise] = useState('')
+const [yearsOfExperience, setYearsOfExperience] = useState('')
+const [bio, setBio] = useState('')
+const [linkedin, setLinkedin] = useState('')
+const [website, setWebsite] = useState('')
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -37,7 +49,18 @@ export default function RegisterPage() {
     }
 
     try {
-      const profile = await register.mutateAsync({ full_name: fullName, email, password })
+      const profile = await register.mutateAsync({
+  full_name: fullName,
+  email,
+  password,
+  role,
+  professional_title: professionalTitle,
+  expertise,
+  years_of_experience: Number(yearsOfExperience),
+  bio,
+  linkedin,
+  website,
+})
       router.replace(dashboardPathForRole(profile.role))
     } catch {
       // Error surfaced below via register.error
@@ -54,8 +77,14 @@ export default function RegisterPage() {
         <div className="w-full max-w-md">
           <Logo variant="dark" className="lg:hidden mb-8" />
 
-          <h1 className="text-3xl font-bold text-his-navy mb-2">Create your account</h1>
-          <p className="text-slate-500 mb-8">Start learning across 11 technology faculties today.</p>
+          <h1 className="text-3xl font-bold text-his-navy mb-2">
+  Create your {role === 'student' ? 'Student' : 'Instructor'} Account
+</h1>
+          <p className="text-slate-500 mb-8">
+  {role === 'student'
+    ? 'Start learning across 11 technology faculties today.'
+    : 'Share your knowledge and inspire the next generation of innovators.'}
+</p>
 
           {error && (
             <div className="mb-6 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
@@ -137,13 +166,104 @@ export default function RegisterPage() {
                 className="w-full rounded-lg border border-his-border bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-his-blue focus:outline-none focus:ring-2 focus:ring-his-blue/20 transition"
               />
             </div>
+{role === 'instructor' && (
+  <>
+    <div>
+      <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        Professional Title
+      </label>
 
+      <input
+        type="text"
+        value={professionalTitle}
+        onChange={(e) => setProfessionalTitle(e.target.value)}
+        placeholder="Senior Frontend Engineer"
+        className="w-full rounded-lg border border-his-border bg-white px-4 py-3"
+        required
+      />
+    </div>
+
+    <div>
+      <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        Area of Expertise
+      </label>
+
+      <input
+        type="text"
+        value={expertise}
+        onChange={(e) => setExpertise(e.target.value)}
+        placeholder="React, Node.js, UI/UX..."
+        className="w-full rounded-lg border border-his-border bg-white px-4 py-3"
+        required
+      />
+    </div>
+
+    <div>
+      <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        Years of Experience
+      </label>
+
+      <input
+        type="number"
+        value={yearsOfExperience}
+        onChange={(e) => setYearsOfExperience(e.target.value)}
+        placeholder="5"
+        className="w-full rounded-lg border border-his-border bg-white px-4 py-3"
+        required
+      />
+    </div>
+
+    <div>
+      <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        Short Bio
+      </label>
+
+      <textarea
+        rows={4}
+        value={bio}
+        onChange={(e) => setBio(e.target.value)}
+        placeholder="Tell us about yourself..."
+        className="w-full rounded-lg border border-his-border bg-white px-4 py-3"
+      />
+    </div>
+
+    <div>
+      <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        LinkedIn (optional)
+      </label>
+
+      <input
+        type="url"
+        value={linkedin}
+        onChange={(e) => setLinkedin(e.target.value)}
+        placeholder="https://linkedin.com/in/..."
+        className="w-full rounded-lg border border-his-border bg-white px-4 py-3"
+      />
+    </div>
+
+    <div>
+      <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        Portfolio / Website (optional)
+      </label>
+
+      <input
+        type="url"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        placeholder="https://yourwebsite.com"
+        className="w-full rounded-lg border border-his-border bg-white px-4 py-3"
+      />
+    </div>
+  </>
+)}
             <button
               type="submit"
               disabled={register.isPending}
               className="w-full inline-flex items-center justify-center px-6 py-3.5 bg-his-navy hover:bg-his-navy-light text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {register.isPending ? 'Creating account…' : 'Create account'}
+              {register.isPending
+  ? 'Creating account...'
+  : `Create ${role === 'student' ? 'Student' : 'Instructor'} Account`}
             </button>
           </form>
 

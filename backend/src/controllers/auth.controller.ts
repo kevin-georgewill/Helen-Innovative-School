@@ -4,8 +4,24 @@ import { supabase, createAuthClient } from '../services/supabase'
 
 export const registerSchema = z.object({
   email: z.string().email(),
+
   password: z.string().min(8),
+
   full_name: z.string().min(1),
+
+  role: z.enum(['student', 'instructor']).default('student'),
+
+  professional_title: z.string().optional(),
+
+  expertise: z.string().optional(),
+
+  years_of_experience: z.number().optional(),
+
+  bio: z.string().optional(),
+
+  linkedin: z.string().optional(),
+
+  website: z.string().optional(),
 })
 
 export const loginSchema = z.object({
@@ -25,7 +41,19 @@ export const register = async (req: Request, res: Response) => {
     console.log('========== REGISTER START ==========')
     console.log('Request body:', req.body)
 
-    const { email, password, full_name } = req.body
+    const {
+  email,
+  password,
+  full_name,
+  role,
+
+  professional_title,
+  expertise,
+  years_of_experience,
+  bio,
+  linkedin,
+  website,
+} = req.body
 
     console.log('Creating auth user...')
 
@@ -54,8 +82,32 @@ export const register = async (req: Request, res: Response) => {
       .insert({
         id: authData.user.id,
         full_name,
-        role: 'student',
+        role,
       })
+      if (role === 'instructor') {
+  const { error: instructorError } = await supabase
+    .from('instructor_profiles')
+    .insert({
+      id: authData.user.id,
+
+      professional_title,
+      expertise,
+      years_of_experience,
+      bio,
+      linkedin,
+      website,
+
+      status: 'pending',
+    })
+
+  if (instructorError) {
+    await supabase.auth.admin.deleteUser(authData.user.id)
+
+    return res.status(500).json({
+      error: 'Failed to create instructor profile',
+    })
+  }
+}
 
     console.log('Profile result:', profileError)
 
