@@ -14,9 +14,25 @@ const app = express();
 app.use(helmet());
 
 // FRONTEND_URL may be a single origin or a comma-separated list (e.g. multiple dev ports).
+const allowedOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map(origin => origin.trim())
+  .filter(Boolean);
+
+allowedOrigins.push('http://localhost:3000');
+
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin(origin, callback) {
+      // Allow requests with no Origin (Postman, curl, server-to-server)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
