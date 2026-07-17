@@ -4,7 +4,7 @@
 // Form: full name, email, password, confirm password → POST /api/v1/auth/register (via useRegister).
 // Registration always creates a `student`; the returned token is stored and we redirect to /dashboard.
 
-import { useState, type FormEvent } from 'react'
+import { Suspense, useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useRegister } from '@/lib/queries/auth'
@@ -12,7 +12,7 @@ import { dashboardPathForRole } from '@/lib/auth'
 import AuthBrandPanel from '@/components/shared/AuthBrandPanel'
 import Logo from '@/components/shared/Logo'
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -276,5 +276,18 @@ const [website, setWebsite] = useState('')
         </div>
       </div>
     </main>
+  )
+}
+export default function RegisterPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center">
+          <p>Loading...</p>
+        </main>
+      }
+    >
+      <RegisterForm />
+    </Suspense>
   )
 }
