@@ -2,7 +2,6 @@
 // Fetches: GET /api/v1/blog
 // Renders article cards with thumbnail, title, category, author, date
 
-import Image from "next/image";
 import { Calendar, User, ArrowRight } from "lucide-react";
 
 const posts = [
@@ -11,42 +10,36 @@ const posts = [
     category: "MedTech",
     author: "Helen Innovative School",
     date: "July 20, 2026",
-    image: "/images/blog/healthcare-ai.jpg",
   },
   {
     title: "The Future of Financial Technology",
     category: "FinTech",
     author: "Helen Innovative School",
     date: "July 18, 2026",
-    image: "/images/blog/fintech.jpg",
   },
   {
     title: "Why Every Professional Needs Digital Skills",
     category: "Innovation",
     author: "Helen Innovative School",
     date: "July 15, 2026",
-    image: "/images/blog/digital-skills.jpg",
   },
   {
     title: "Cybersecurity Tips for Beginners",
     category: "CyberTech",
     author: "Helen Innovative School",
     date: "July 12, 2026",
-    image: "/images/blog/cybersecurity.jpg",
   },
   {
     title: "Building a Career in Software Development",
     category: "Software",
     author: "Helen Innovative School",
     date: "July 10, 2026",
-    image: "/images/blog/software-development.jpg",
   },
   {
     title: "Using AI to Improve Education",
     category: "EdTech",
     author: "Helen Innovative School",
     date: "July 8, 2026",
-    image: "/images/blog/ai-education.jpg",
   },
 ];
 
@@ -82,18 +75,16 @@ export default function BlogPage() {
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
 
           {posts.map((post) => (
-            <article
+            <div
               key={post.title}
-              className="overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="overflow-hidden rounded-3xl border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
 
-              <Image
-                src={post.image}
-                alt={post.title}
-                width={600}
-                height={350}
-                className="h-52 w-full object-cover"
-              />
+              <div className="h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                <span className="text-blue-700 font-semibold">
+                  {post.category}
+                </span>
+              </div>
 
               <div className="p-6">
 
@@ -101,7 +92,7 @@ export default function BlogPage() {
                   {post.category}
                 </span>
 
-                <h3 className="mt-4 text-2xl font-bold leading-snug">
+                <h3 className="mt-4 text-2xl font-bold">
                   {post.title}
                 </h3>
 
@@ -109,24 +100,24 @@ export default function BlogPage() {
 
                   <div className="flex items-center gap-2">
                     <User size={16} />
-                    <span>{post.author}</span>
+                    {post.author}
                   </div>
 
                   <div className="flex items-center gap-2">
                     <Calendar size={16} />
-                    <span>{post.date}</span>
+                    {post.date}
                   </div>
 
                 </div>
 
-                <button className="mt-6 flex items-center gap-2 font-semibold text-blue-700 transition hover:text-blue-900">
+                <button className="mt-6 flex items-center gap-2 font-semibold text-blue-700 hover:text-blue-900">
                   Read More
                   <ArrowRight size={18} />
                 </button>
 
               </div>
 
-            </article>
+            </div>
           ))}
 
         </div>
