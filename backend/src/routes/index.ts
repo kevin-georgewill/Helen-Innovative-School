@@ -15,6 +15,7 @@ import blogRoutes from './blog.routes'
 import notificationsRoutes from './notifications.routes'
 import paymentsRoutes from './payments.routes'
 import adminRoutes from './admin.routes'
+import instructorRoutes from './instructors.routes'
 
 const router = Router()
 
@@ -34,5 +35,6 @@ router.use('/blog', blogRoutes)
 router.use('/notifications', notificationsRoutes)
 router.use('/payments', paymentsRoutes)
 router.use('/admin', adminRoutes)
+router.use('/instructors', instructorRoutes)
 
 export default router

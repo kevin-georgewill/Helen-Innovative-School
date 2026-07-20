@@ -3,72 +3,119 @@
 import { Plus } from "lucide-react";
 import QuestionCard from "./QuestionCard";
 
-interface Question {
+export interface Question {
   id: number;
   text: string;
+  options: string[];
+  correctAnswer: string;
 }
 
 interface QuestionListProps {
   questions: Question[];
   onAddQuestion?: () => void;
   onDeleteQuestion?: (id: number) => void;
+  onEditQuestion?: (question: Question) => void;
 }
 
 export default function QuestionList({
   questions,
   onAddQuestion,
   onDeleteQuestion,
+  onEditQuestion,
 }: QuestionListProps) {
   return (
     <section className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
 
+
       {/* Header */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-        <h2 className="text-2xl font-bold text-slate-900">
-          Set Questions
-        </h2>
+        <div>
+          <h2 className="text-2xl font-bold text-slate-900">
+            Set Questions
+          </h2>
+
+          <p className="mt-1 text-sm text-gray-500">
+            Add questions, answer options and correct answers.
+          </p>
+        </div>
+
 
         <button
           type="button"
           onClick={onAddQuestion}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-800"
+          className="
+            inline-flex
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            bg-blue-900
+            px-5
+            py-3
+            text-sm
+            font-semibold
+            text-white
+            transition
+            hover:bg-blue-800
+            active:scale-95
+          "
         >
           <Plus size={18} />
+
           Add Question
+
         </button>
 
       </div>
+
+
+
 
       {/* Questions */}
       <div className="space-y-4">
 
         {questions.length > 0 ? (
+
           questions.map((question, index) => (
+
             <QuestionCard
               key={question.id}
               number={index + 1}
-              question={question.text}
+              question={question}
               onDelete={() =>
                 onDeleteQuestion?.(question.id)
               }
+              onEdit={() =>
+                onEditQuestion?.(question)
+              }
             />
+
           ))
+
         ) : (
+
           <div className="rounded-2xl border-2 border-dashed border-gray-300 py-12 text-center">
 
             <h3 className="text-lg font-semibold text-gray-700">
               No questions added
             </h3>
 
+
             <p className="mt-2 text-gray-500">
-              Click <strong>Add Question</strong> to create your first question.
+              Click{" "}
+              <strong>
+                Add Question
+              </strong>{" "}
+              to create your first question.
             </p>
 
           </div>
+
         )}
 
       </div>
+
 
     </section>
   );

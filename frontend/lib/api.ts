@@ -292,3 +292,59 @@ export const adminApi = {
   approveCertificate: (enrollmentId: string) =>
     post<Certificate>(`/admin/certificates/${enrollmentId}/approve`),
 }
+
+//____________Instructos____________________________________________________
+// ─── Instructors ─────────────────────────────────────────────
+
+export interface Instructor {
+  id: string
+  professional_title: string
+  expertise: string
+  years_of_experience: number
+  bio: string
+  linkedin: string
+  website: string
+  full_name: string
+  email: string;
+  profiles: {
+    full_name: string
+    avatar_url: string | null
+    phone: string | null;
+  }
+}
+
+export const instructorsApi = {
+  list: () => get<Instructor[]>("/instructors"),
+
+  me: () => get<Instructor>("/instructors/me"),
+
+  dashboard: () =>
+    get<{
+      instructor: {
+        full_name: string;
+        avatar_url: string | null;
+        professional_title: string;
+        expertise: string;
+        years_of_experience: number;
+      };
+
+      stats: {
+        total_students: number;
+        total_courses: number;
+        pending_assignments: number;
+        upcoming_classes: number;
+      };
+
+      notifications: {
+        id: number;
+        message: string;
+      }[];
+
+      recent_activities: {
+        id: number;
+        user: string;
+        activity: string;
+        time: string;
+      }[];
+    }>("/instructors/dashboard"),
+};

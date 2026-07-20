@@ -178,3 +178,56 @@ export const addModule = async (req: Request, res: Response) => {
 
   return res.status(201).json({ data, message: 'Module added' })
 }
+export const dashboard = async (req: Request, res: Response) => {
+  const instructorId = req.user!.id;
+
+  // Instructor Profile
+  const { data: instructor, error: instructorError } = await supabase
+    .from("profiles")
+    .select(`
+      full_name,
+      avatar_url,
+      instructor_profiles (
+        professional_title,
+        expertise,
+        years_of_experience
+      )
+    `)
+    .eq("id", instructorId)
+    .single();
+
+  if (instructorError) {
+    return res.status(500).json({
+      error: instructorError.message,
+    });
+  }
+
+  // Courses
+  const { data: courses } = await supabase
+    .from("courses")
+    .select("id")
+    .eq("instructor_id", instructorId);
+
+  // Students
+  const { data: enrollments } = await supabase
+    .from("enrollments")
+    .select("id, course_id, courses!inner(instructor_id)")
+    .eq("courses.instructor_id", instructorId);
+
+  return res.json({
+    data: {
+      instructor,
+
+      stats: {
+        total_courses: courses?.length ?? 0,
+        total_students: enrollments?.length ?? 0,
+        pending_assignments: 0,
+        upcoming_classes: 0,
+      },
+
+      notifications: [],
+
+      recent_activities: [],
+    },
+  });
+};

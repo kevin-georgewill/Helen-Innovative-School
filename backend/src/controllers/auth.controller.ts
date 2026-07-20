@@ -97,7 +97,7 @@ export const register = async (req: Request, res: Response) => {
       linkedin,
       website,
 
-      status: 'pending',
+      status: 'approved',
     })
 
   if (instructorError) {
