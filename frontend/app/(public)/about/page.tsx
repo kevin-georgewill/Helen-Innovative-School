@@ -1,13 +1,46 @@
 import {
-  Eye,
-  Rocket,
   Lightbulb,
   GraduationCap,
   Globe,
   Users,
   Laptop,
   Target,
+  Rocket,
+  Cpu,
 } from "lucide-react";
+
+const features = [
+  {
+    title: "Technology-Driven Learning",
+    description: "Learn emerging technologies shaping every profession.",
+    icon: Cpu,
+  },
+  {
+    title: "Industry-Relevant Curriculum",
+    description: "Courses designed around today's workplace needs.",
+    icon: GraduationCap,
+  },
+  {
+    title: "Flexible Learning",
+    description: "Study on campus, online or through hybrid programs.",
+    icon: Globe,
+  },
+  {
+    title: "Practical Projects",
+    description: "Build real-world solutions through hands-on learning.",
+    icon: Laptop,
+  },
+  {
+    title: "Expert Faculty",
+    description: "Learn from experienced professionals and innovators.",
+    icon: Users,
+  },
+  {
+    title: "Future-Ready Skills",
+    description: "Develop AI, digital and entrepreneurial competencies.",
+    icon: Rocket,
+  },
+];
 
 const values = [
   {
@@ -17,12 +50,12 @@ const values = [
   },
   {
     title: "Excellence",
-    description: "Delivering high-quality, industry-focused education.",
+    description: "Delivering high-quality education.",
     icon: GraduationCap,
   },
   {
     title: "Practical Learning",
-    description: "Learning by building real-world solutions.",
+    description: "Learning through real-world application.",
     icon: Laptop,
   },
   {
@@ -42,92 +75,114 @@ const values = [
   },
 ];
 
+const audience = [
+  "Students",
+  "Professionals",
+  "Entrepreneurs",
+  "Organizations",
+  "Government",
+  "Career Changers",
+];
+
 export default function AboutPage() {
   return (
-    <div className="space-y-20">
+    <div className="space-y-20 pb-24">
 
-  {/* Hero */}
-  <section className="w-full bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-24 text-white">
-    <div className="mx-auto max-w-6xl px-8 text-center">
-      <h1 className="text-5xl font-bold">
-        Helen Innovative School
-      </h1>
+      {/* Hero */}
+      <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-24 text-white">
 
-      <p className="mt-4 text-2xl text-blue-100">
-        Where Every Profession Meets Innovation
-      </p>
+        <div className="mx-auto max-w-5xl px-6 text-center">
 
-      <p className="mx-auto mt-8 max-w-4xl text-lg leading-8 text-blue-100">
-        Helen Innovative School equips students, professionals,
-        entrepreneurs and organizations with practical technology,
-        innovation and AI skills that prepare them for the future of work.
-      </p>
-    </div>
-        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-          <button className="rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 hover:bg-gray-100 transition">
-            Explore Courses
-          </button>
+          <h1 className="text-5xl font-bold">
+            About Helen Innovative School
+          </h1>
 
-          <button className="rounded-xl border border-white px-8 py-4 font-semibold hover:bg-white hover:text-blue-900 transition">
-            Apply Now
-          </button>
+          <p className="mt-4 text-2xl text-blue-100">
+            Where Every Profession Meets Innovation
+          </p>
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-blue-100">
+            We prepare students, professionals and organizations with practical
+            technology, AI and innovation skills needed to thrive in today's
+            rapidly evolving world.
+          </p>
+
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="/courses"
+              className="rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 hover:bg-gray-100"
+            >
+              Explore Courses
+            </a>
+
+            <a
+              href="/register"
+              className="rounded-xl border border-white px-8 py-4 font-semibold hover:bg-white hover:text-blue-900"
+            >
+              Apply Now
+            </a>
+          </div>
+
         </div>
 
       </section>
 
-      {/* Why We Exist */}
-      <section className="mx-auto max-w-6xl">
+      {/* About */}
+      <section className="mx-auto max-w-6xl px-6 text-center">
 
-        <h2 className="mb-6 text-4xl font-bold">
-          Why We Exist
+        <h2 className="text-4xl font-bold">
+          Who We Are
         </h2>
 
-        <p className="text-lg leading-9 text-gray-600">
-          Technology is transforming every industry. Helen Innovative School
-          bridges the gap between traditional education and today's digital
-          economy by providing practical, innovation-driven learning that
-          prepares learners to succeed in every profession.
+        <p className="mx-auto mt-6 max-w-4xl text-lg leading-8 text-gray-600">
+          Helen Innovative School bridges the gap between traditional education
+          and the future of work by integrating technology, innovation and
+          entrepreneurship into every profession. Our goal is to empower
+          learners with practical, industry-ready skills that create lasting
+          impact.
         </p>
 
       </section>
 
-      {/* Vision & Mission */}
-      <section className="grid gap-8 lg:grid-cols-2">
+      {/* Why Choose Us */}
+      <section className="mx-auto max-w-7xl px-6">
 
-        <div className="rounded-3xl border bg-white p-8 shadow-sm">
+        <h2 className="mb-10 text-center text-4xl font-bold">
+          Why Choose Helen Innovative School
+        </h2>
 
-          <Eye className="mb-4 h-10 w-10 text-blue-700" />
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
-          <h3 className="text-2xl font-bold">
-            Our Vision
-          </h3>
+          {features.map((item) => {
+            const Icon = item.icon;
 
-          <p className="mt-4 leading-7 text-gray-600">
-            To become Africa's leading institution for technology-integrated
-            professional education and innovation.
-          </p>
+            return (
+              <div
+                key={item.title}
+                className="rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-lg"
+              >
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
+                  <Icon className="h-7 w-7 text-blue-700" />
+                </div>
 
-        </div>
+                <h3 className="text-xl font-bold">
+                  {item.title}
+                </h3>
 
-        <div className="rounded-3xl border bg-white p-8 shadow-sm">
+                <p className="mt-3 text-gray-600">
+                  {item.description}
+                </p>
 
-          <Rocket className="mb-4 h-10 w-10 text-blue-700" />
-
-          <h3 className="text-2xl font-bold">
-            Our Mission
-          </h3>
-
-          <p className="mt-4 leading-7 text-gray-600">
-            Empowering individuals and organizations with future-ready
-            skills, innovative thinking and practical technology knowledge.
-          </p>
+              </div>
+            );
+          })}
 
         </div>
 
       </section>
 
       {/* Core Values */}
-      <section>
+      <section className="mx-auto max-w-7xl px-6">
 
         <h2 className="mb-10 text-center text-4xl font-bold">
           Our Core Values
@@ -151,7 +206,7 @@ export default function AboutPage() {
                   {value.title}
                 </h3>
 
-                <p className="mt-3 leading-7 text-gray-600">
+                <p className="mt-3 text-gray-600">
                   {value.description}
                 </p>
 
@@ -164,7 +219,7 @@ export default function AboutPage() {
       </section>
 
       {/* Who We Serve */}
-      <section>
+      <section className="mx-auto max-w-7xl px-6">
 
         <h2 className="mb-10 text-center text-4xl font-bold">
           Who We Serve
@@ -172,17 +227,10 @@ export default function AboutPage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-          {[
-            "Students",
-            "Professionals",
-            "Entrepreneurs",
-            "Organizations",
-            "Government Institutions",
-            "Career Changers",
-          ].map((item) => (
+          {audience.map((item) => (
             <div
               key={item}
-              className="rounded-2xl border bg-white p-6 text-center shadow-sm"
+              className="rounded-2xl border bg-white p-8 text-center shadow-sm"
             >
               <h3 className="text-xl font-semibold">
                 {item}
@@ -194,43 +242,41 @@ export default function AboutPage() {
 
       </section>
 
-      {/* Call to Action */}
-<section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-20 text-white">
+      {/* CTA */}
+      <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 py-20 text-white">
 
-  <div className="mx-auto max-w-5xl px-6 text-center">
+        <div className="mx-auto max-w-5xl px-6 text-center">
 
-    <h2 className="text-4xl font-bold md:text-5xl">
-      Ready to Shape the Future?
-    </h2>
+          <h2 className="text-4xl font-bold">
+            Ready to Shape the Future?
+          </h2>
 
-    <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-blue-100">
-      Join Helen Innovative School and gain practical, industry-ready skills
-      in Artificial Intelligence, digital transformation, innovation and
-      emerging technologies. Learn from experienced professionals and prepare
-      for the future of work.
-    </p>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-blue-100">
+            Discover practical programs designed to help you lead with
+            technology, innovation and confidence in the digital age.
+          </p>
 
-    <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
 
-      <a
-        href="/courses"
-        className="rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 transition hover:bg-gray-100"
-      >
-        Explore Courses
-      </a>
+            <a
+              href="/courses"
+              className="rounded-xl bg-white px-8 py-4 font-semibold text-blue-900 hover:bg-gray-100"
+            >
+              Explore Courses
+            </a>
 
-      <a
-        href="/register"
-        className="rounded-xl border border-white px-8 py-4 font-semibold text-white transition hover:bg-white hover:text-blue-900"
-      >
-        Apply Now
-      </a>
+            <a
+              href="/register"
+              className="rounded-xl border border-white px-8 py-4 font-semibold hover:bg-white hover:text-blue-900"
+            >
+              Apply Now
+            </a>
 
-    </div>
+          </div>
 
-  </div>
+        </div>
 
-</section>
+      </section>
 
     </div>
   );
