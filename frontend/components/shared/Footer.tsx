@@ -13,7 +13,6 @@ const quickLinks = [
 const supportLinks = [
   { label: 'Faculties', href: '/faculties' },
   { label: 'Apply now', href: '/register' },
-  { label: 'info@his.edu.ng', href: 'mailto:info@his.edu.ng' },
   { label: 'Help Center', href: '/help' },
   { label: 'Verify Certificates', href: '/verify' },
 ]
