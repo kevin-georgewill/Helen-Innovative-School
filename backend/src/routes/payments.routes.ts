@@ -1,9 +1,35 @@
+
 import { Router } from 'express'
+import { authenticateUser, requireRole } from '../middleware/auth'
+import { validateRequest } from '../middleware/validate'
+import {
+  initiateCoursePayment,
+  initiateCoursePaymentSchema,
+  verifyCoursePayment,
+  verifyCoursePaymentSchema,
+  listSupportedMarkets,
+  listCoursePrices,
+} from '../controllers/payments.controller'
 
-// POST /api/v1/payments/paystack/initiate   — start a Paystack transaction [auth]
-// POST /api/v1/payments/paystack/verify     — Paystack webhook: verify + activate enrollment
-// POST /api/v1/payments/stripe/initiate     — create Stripe PaymentIntent [auth]
-// POST /api/v1/payments/stripe/webhook      — Stripe webhook: confirm payment + activate enrollment
-//   note: stripe/webhook uses express.raw body parser (not express.json)
+const router = Router()
 
-export default Router()
+router.get('/markets', listSupportedMarkets)
+router.get('/prices', listCoursePrices)
+
+router.post(
+  '/paystack/initiate',
+  authenticateUser,
+  requireRole('student'),
+  validateRequest(initiateCoursePaymentSchema),
+  initiateCoursePayment
+)
+
+router.post(
+  '/paystack/verify',
+  authenticateUser,
+  requireRole('student'),
+  validateRequest(verifyCoursePaymentSchema),
+  verifyCoursePayment
+)
+
+export default router
