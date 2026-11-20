@@ -1,10 +1,7 @@
+
 {
   "dependencies": {
-<<<<<<< Updated upstream
-    "@supabase/supabase-js": "^2.110.0"
-  }
-=======
-    "@supabase/supabase-js": "^2.45.0",
+    "@supabase/supabase-js": "^2.110.0",
     "express": "^5.1.0",
     "dotenv": "^16.4.7",
     "react": "^19.2.0",
@@ -15,10 +12,8 @@
   "devDependencies": {
     "vite": "^6.3.1"
   },
-  
-"scripts": {
-  "build": "vite build --config buildgram-node/vite.config.mjs",
-  "start": "node buildgram-node/server.mjs"
-}
->>>>>>> Stashed changes
+  "scripts": {
+    "build": "vite build --config buildgram-node/vite.config.mjs",
+    "start": "node buildgram-node/server.mjs"
+  }
 }
